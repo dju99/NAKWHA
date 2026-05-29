@@ -303,7 +303,8 @@
       padding: 0 1.5rem 0.5rem;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-inline: contain;
+      overscroll-behavior-block: none;
     }
     .members-grid::-webkit-scrollbar { display: none; }
     .member-card {
@@ -331,11 +332,11 @@
       gap: 0.9rem;
       overflow-x: auto;
       overscroll-behavior-inline: contain;
+      overscroll-behavior-block: none;
       scroll-snap-type: inline mandatory;
       padding: 0 1rem 0.7rem;
       margin-left: -1rem;
       margin-right: -1rem;
-      -webkit-overflow-scrolling: touch;
     }
     .gallery-item {
       margin-bottom: 0;
