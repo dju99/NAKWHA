@@ -156,7 +156,7 @@
 
   .hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(5.5rem, 18vw, 15rem);
+    font-size: clamp(4rem, 18vw, 15rem);
     line-height: 0.85;
     letter-spacing: 0.03em;
     color: #fff;
@@ -205,7 +205,7 @@
   }
   .hero-badge-item .b-value {
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 900;
     color: #fff;
   }
 
@@ -214,7 +214,7 @@
     background: linear-gradient(90deg, #f472b6 0%, #c084fc 50%, #818cf8 100%);
     color: #fff;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: 0.12em;
     padding: 1.1rem 3.5rem;
     border-radius: 999px;
@@ -298,6 +298,7 @@
     gap: 1.5rem;
     max-width: 1050px;
     margin: 0 auto;
+    align-items: start;
   }
   .band-card {
     border-radius: 28px;
@@ -305,7 +306,7 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
-    cursor: default;
+    cursor: pointer;
   }
   .band-card:hover {
     transform: translateY(-8px);
@@ -531,6 +532,7 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3.8rem;
     line-height: 1;
+    text-align: right;
     background: linear-gradient(90deg, #f472b6, #c084fc, #818cf8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -548,7 +550,7 @@
     border-radius: 16px;
     border: none;
     font-size: 0.88rem;
-    font-weight: 700;
+    font-weight: 900;
     cursor: pointer;
     text-decoration: none;
     text-align: center;
@@ -626,6 +628,18 @@
     .tl-time { left: -80px; width: 65px; font-size: 0.75rem; }
     .section { padding: 4.5rem 1.5rem; }
   }
+  @media (max-width: 900px) {
+    .bands-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+    .hero-inner { max-width: 700px; }
+  }
+  @media (max-width: 400px) {
+    .timeline { padding-left: 68px; }
+    .timeline::before { left: 56px; }
+    .tl-time { left: -68px; width: 54px; font-size: 0.7rem; }
+  }
 
   /* ── 등장 애니메이션 ── */
   .appear {
@@ -678,6 +692,7 @@
   @media (max-width: 600px) {
     .cd-item { min-width: 64px; padding: 0.75rem 0.8rem; }
     .cd-num { font-size: 2rem; }
+    .cd-sep { font-size: 1.6rem; padding-top: 0.65rem; }
   }
 
   /* ── FAQ ── */
@@ -987,7 +1002,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 0.8rem;
-    transition: opacity 0.65s ease, visibility 0.65s;
+    transition: opacity 0.22s ease, visibility 0.22s;
   }
   .splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
   .splash-logo {
@@ -1009,36 +1024,6 @@
   @keyframes splashIn {
     from { opacity: 0; transform: translateY(22px); }
     to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── 잔여 좌석 바 ── */
-  .tc-seats { padding: 0 2rem 1.2rem; }
-  .tc-seats-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #c0a0d0;
-    margin-bottom: 0.55rem;
-  }
-  .tc-seats-label .seats-highlight {
-    font-weight: 700;
-    color: #f472b6;
-  }
-  .tc-seats-bar {
-    width: 100%;
-    height: 8px;
-    background: #f5eeff;
-    border-radius: 999px;
-    overflow: hidden;
-  }
-  .tc-seats-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #f472b6, #c084fc);
-    border-radius: 999px;
-    width: 0;
-    transition: width 1.3s cubic-bezier(.22,.68,0,1);
   }
 
   /* ── 커서 벚꽃 이펙트 ── */
@@ -1208,7 +1193,7 @@
     overflow: hidden;
     transition: max-height 0.42s ease;
   }
-  .bc-setlist.open { max-height: 700px; }
+  .bc-setlist.open { max-height: 920px; }
   .bc-setlist-inner {
     margin-top: 0.8rem;
     padding-top: 0.75rem;
@@ -1341,7 +1326,6 @@
   [data-theme="dark"] .tc-row          { border-bottom-color: #2d1a4e; }
   [data-theme="dark"] .tc-row .tc-val  { color: #f0e6ff; }
   [data-theme="dark"] .tc-price-area   { border-top-color: #3d1f5c; }
-  [data-theme="dark"] .tc-seats-bar    { background: #2d1a4e; }
   /* 안내사항 카드 */
   [data-theme="dark"] .notice-card {
     background: #1a0835;
@@ -1429,7 +1413,7 @@
     <div class="hero-badges">
       <div class="hero-badge-item">
         <span class="b-label">Date</span>
-        <span class="b-value">0000. 00. 00</span>
+        <span class="b-value">2026. 07. 12</span>
       </div>
       <div class="hero-badge-item">
         <span class="b-label">Time</span>
@@ -1437,7 +1421,7 @@
       </div>
       <div class="hero-badge-item">
         <span class="b-label">Venue</span>
-        <span class="b-value">공연장 TBD</span>
+        <span class="b-value">얼라이브홀</span>
       </div>
     </div>
 
@@ -1484,52 +1468,74 @@
   <p class="s-desc">세 팀의 다채로운 사운드가 봄밤을 물들입니다</p>
 
   <div class="bands-grid">
-    <div class="band-card appear">
+    <div class="band-card appear" data-band-url="band1.html" role="link" tabindex="0">
       <div class="bc-num">01</div>
-      <span class="bc-genre">장르 TBD</span>
-      <h3 class="bc-name">팀 이름 TBD</h3>
+      <h3 class="bc-name">NAKWHA</h3>
       <p class="bc-desc">팀 소개 한 줄 — 분위기, 매력 포인트 등을 여기에 작성해주세요.</p>
       <div class="bc-links">
-        <a href="#" class="bc-link">📷 Instagram</a>
-        <a href="#" class="bc-link">▶ YouTube</a>
+        <a href="https://www.instagram.com/nk.petals?igsh=dXJvdnkwbHZ3bmFn" class="bc-link">📷 Instagram</a>
+        <a href="https://youtube.com/@band-nakhwa?si=GjHB7JCoDk2tsiXA" class="bc-link">▶ YouTube</a>
       </div>
       <button class="bc-setlist-toggle" id="setlist-toggle-1">
-        <span>🎵 세트리스트</span>
+        <span>🎵 SetList</span>
         <span class="bc-setlist-arrow">▼</span>
       </button>
       <div class="bc-setlist" id="setlist-1">
         <div class="bc-setlist-inner">
-          <div class="bc-track"><span class="bc-track-num">1</span><span class="bc-track-title">REDRED</span><span class="bc-track-artist">CORTIS</span></div>
-          <div class="bc-track"><span class="bc-track-num">2</span><span class="bc-track-title">갑자기</span><span class="bc-track-artist">아이오아이</span></div>
-          <div class="bc-track"><span class="bc-track-num">3</span><span class="bc-track-title">It's Me</span><span class="bc-track-artist">아일릿</span></div>
-          <div class="bc-track"><span class="bc-track-num">4</span><span class="bc-track-title">소문의 낙원</span><span class="bc-track-artist">악뮤</span></div>
-          <div class="bc-track"><span class="bc-track-num">5</span><span class="bc-track-title">Heavy Serenade</span><span class="bc-track-artist">NMIXX</span></div>
-          <div class="bc-track"><span class="bc-track-num">6</span><span class="bc-track-title">기쁨, 슬픔, 아름다운 마음</span><span class="bc-track-artist">악뮤</span></div>
-          <div class="bc-track"><span class="bc-track-num">7</span><span class="bc-track-title">캐치 캐치</span><span class="bc-track-artist">YENA</span></div>
-          <div class="bc-track"><span class="bc-track-num">8</span><span class="bc-track-title">RUDE!</span><span class="bc-track-artist">Hearts2Hearts</span></div>
-          <div class="bc-track"><span class="bc-track-num">9</span><span class="bc-track-title">사랑하게 될 거야</span><span class="bc-track-artist">한로로</span></div>
-          <div class="bc-track"><span class="bc-track-num">10</span><span class="bc-track-title">0+0</span><span class="bc-track-artist">한로로</span></div>
+          <div class="bc-track"><span class="bc-track-num">1</span><span class="bc-track-title">아지랑이</span><span class="bc-track-artist">쏜애플 (THORNAPPLE)</span></div>
+          <div class="bc-track"><span class="bc-track-num">2</span><span class="bc-track-title">우리의 밤은 당신의 낮보다 아름답다</span><span class="bc-track-artist">코나(Kona) cover.쏜애플</span></div>
+          <div class="bc-track"><span class="bc-track-num">3</span><span class="bc-track-title">야경</span><span class="bc-track-artist">터치드 (TOUCHED)</span></div>
+          <div class="bc-track"><span class="bc-track-num">4</span><span class="bc-track-title">Last Day</span><span class="bc-track-artist">터치드 (TOUCHED)</span></div>
+          <div class="bc-track"><span class="bc-track-num">5</span><span class="bc-track-title">여전히 이곳에</span><span class="bc-track-artist">너드커넥션 (Nerd Connection)</span></div>
+          <div class="bc-track"><span class="bc-track-num">6</span><span class="bc-track-title">시간을 달리네</span><span class="bc-track-artist">한로로 (HANRORO)</span></div>
+          <div class="bc-track"><span class="bc-track-num">7</span><span class="bc-track-title">전설</span><span class="bc-track-artist">잔나비</span></div>
+          <div class="bc-track"><span class="bc-track-num">8</span><span class="bc-track-title">Find Me!</span><span class="bc-track-artist">The Poles (더폴스)</span></div>
+          <div class="bc-track"><span class="bc-track-num">9</span><span class="bc-track-title">오리날다</span><span class="bc-track-artist">체리필터 (CherryFilter)</span></div>
+          <div class="bc-track"><span class="bc-track-num">10</span><span class="bc-track-title">Cicadas</span><span class="bc-track-artist">The Black Skirts (검정치마)</span></div>
+          <div class="bc-track"><span class="bc-track-num">11</span><span class="bc-track-title">Echo!</span><span class="bc-track-artist">The Poles (더폴스)</span></div>
+          <div class="bc-track"><span class="bc-track-num">12</span><span class="bc-track-title">오늘은 잠에 들 거예요</span><span class="bc-track-artist">유다빈밴드 (YdBB)</span></div>
+          <div class="bc-track"><span class="bc-track-num">13</span><span class="bc-track-title">앵콜요청금지</span><span class="bc-track-artist">브로콜리너마저 (Broccoli, you too?)</span></div>
         </div>
       </div>
     </div>
-    <div class="band-card appear" style="transition-delay:0.12s">
+    <div class="band-card appear" style="transition-delay:0.12s" data-band-url="band2.html" role="link" tabindex="0">
       <div class="bc-num">02</div>
-      <span class="bc-genre">장르 TBD</span>
       <h3 class="bc-name">팀 이름 TBD</h3>
       <p class="bc-desc">팀 소개 한 줄 — 분위기, 매력 포인트 등을 여기에 작성해주세요.</p>
       <div class="bc-links">
         <a href="#" class="bc-link">📷 Instagram</a>
         <a href="#" class="bc-link">▶ YouTube</a>
       </div>
+      <button class="bc-setlist-toggle" id="setlist-toggle-2">
+        <span>🎵 SetList</span>
+        <span class="bc-setlist-arrow">▼</span>
+      </button>
+      <div class="bc-setlist" id="setlist-2">
+        <div class="bc-setlist-inner">
+          <div class="bc-track"><span class="bc-track-num">1</span><span class="bc-track-title">곡명 TBD</span><span class="bc-track-artist">아티스트 TBD</span></div>
+          <div class="bc-track"><span class="bc-track-num">2</span><span class="bc-track-title">곡명 TBD</span><span class="bc-track-artist">아티스트 TBD</span></div>
+          <div class="bc-track"><span class="bc-track-num">3</span><span class="bc-track-title">곡명 TBD</span><span class="bc-track-artist">아티스트 TBD</span></div>
+        </div>
+      </div>
     </div>
-    <div class="band-card appear" style="transition-delay:0.24s">
+    <div class="band-card appear" style="transition-delay:0.24s" data-band-url="band3.html" role="link" tabindex="0">
       <div class="bc-num">03</div>
-      <span class="bc-genre">장르 TBD</span>
       <h3 class="bc-name">팀 이름 TBD</h3>
       <p class="bc-desc">팀 소개 한 줄 — 분위기, 매력 포인트 등을 여기에 작성해주세요.</p>
       <div class="bc-links">
         <a href="#" class="bc-link">📷 Instagram</a>
         <a href="#" class="bc-link">▶ YouTube</a>
+      </div>
+      <button class="bc-setlist-toggle" id="setlist-toggle-3">
+        <span>🎵 SetList</span>
+        <span class="bc-setlist-arrow">▼</span>
+      </button>
+      <div class="bc-setlist" id="setlist-3">
+        <div class="bc-setlist-inner">
+          <div class="bc-track"><span class="bc-track-num">1</span><span class="bc-track-title">곡명 TBD</span><span class="bc-track-artist">아티스트 TBD</span></div>
+          <div class="bc-track"><span class="bc-track-num">2</span><span class="bc-track-title">곡명 TBD</span><span class="bc-track-artist">아티스트 TBD</span></div>
+          <div class="bc-track"><span class="bc-track-num">3</span><span class="bc-track-title">곡명 TBD</span><span class="bc-track-artist">아티스트 TBD</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1554,7 +1560,7 @@
       <span class="tl-time">19:00</span>
       <div class="tl-dot"></div>
       <div class="tl-body">
-        <strong>팀 이름 TBD</strong>
+        <strong>NAKWHA</strong>
         <span>첫 번째 공연 · 약 30분</span>
       </div>
     </div>
@@ -1620,7 +1626,7 @@
     <div class="tc-body">
       <div class="tc-row">
         <span class="tc-key">Date</span>
-        <span class="tc-val">0000. 00. 00 (토)</span>
+        <span class="tc-val">2026. 07. 12 (일)</span>
       </div>
       <div class="tc-row">
         <span class="tc-key">Time</span>
@@ -1628,7 +1634,7 @@
       </div>
       <div class="tc-row">
         <span class="tc-key">Venue</span>
-        <span class="tc-val">공연장 TBD</span>
+        <span class="tc-val">얼라이브홀</span>
       </div>
       <div class="tc-row">
         <span class="tc-key">Seat</span>
@@ -1637,8 +1643,7 @@
     </div>
 
     <div class="tc-price-area">
-      <p class="tc-price-label">Ticket Price</p>
-      <p class="tc-price-val">TBD원</p>
+      <p class="tc-price-val">5,000원</p>
     </div>
 
     <div class="tc-btns">
@@ -1843,7 +1848,7 @@
 
   // 인트로 스플래시
   window.addEventListener('load', () => {
-    setTimeout(() => document.getElementById('splash').classList.add('hide'), 1400);
+    setTimeout(() => document.getElementById('splash').classList.add('hide'), 350);
   });
 
 
@@ -1927,8 +1932,34 @@
   document.querySelectorAll('.bc-setlist-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const num = btn.id.replace('setlist-toggle-', '');
-      btn.classList.toggle('open');
-      document.getElementById('setlist-' + num).classList.toggle('open');
+      const target = document.getElementById('setlist-' + num);
+      const willOpen = !target.classList.contains('open');
+
+      document.querySelectorAll('.bc-setlist-toggle.open').forEach(openBtn => {
+        openBtn.classList.remove('open');
+      });
+      document.querySelectorAll('.bc-setlist.open').forEach(openSetlist => {
+        openSetlist.classList.remove('open');
+      });
+
+      if (willOpen) {
+        btn.classList.add('open');
+        target.classList.add('open');
+      }
+    });
+  });
+
+  // 밴드 카드 클릭 이동
+  document.querySelectorAll('.band-card[data-band-url]').forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('a, button')) return;
+      window.location.href = card.dataset.bandUrl;
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      if (e.target.closest('a, button')) return;
+      e.preventDefault();
+      window.location.href = card.dataset.bandUrl;
     });
   });
 
