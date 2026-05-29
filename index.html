@@ -306,7 +306,6 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
   }
   .band-card:hover {
     transform: translateY(-8px);
@@ -334,13 +333,22 @@
     bottom: 20px; right: 20px;
   }
 
+  .bc-entry {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 0.6rem;
+  }
   .bc-num {
+    display: block;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 5rem;
     color: rgba(255,255,255,0.3);
     line-height: 1;
     margin-bottom: 0.25rem;
+    transition: color 0.2s;
   }
+  .bc-entry:hover .bc-num { color: rgba(255,255,255,0.6); }
+  .bc-entry:hover .bc-name { color: rgba(255,255,255,0.85); }
   .bc-genre {
     display: inline-block;
     background: rgba(255,255,255,0.3);
@@ -1468,9 +1476,11 @@
   <p class="s-desc">세 팀의 다채로운 사운드가 봄밤을 물들입니다</p>
 
   <div class="bands-grid">
-    <div class="band-card appear" data-band-url="band1.html" role="link" tabindex="0">
-      <div class="bc-num">01</div>
-      <h3 class="bc-name">NAKWHA</h3>
+    <div class="band-card appear">
+      <a href="band1.html" class="bc-entry">
+        <span class="bc-num">01</span>
+        <h3 class="bc-name">NAKWHA</h3>
+      </a>
       <p class="bc-desc">팀 소개 한 줄 — 분위기, 매력 포인트 등을 여기에 작성해주세요.</p>
       <div class="bc-links">
         <a href="https://www.instagram.com/nk.petals?igsh=dXJvdnkwbHZ3bmFn" class="bc-link">📷 Instagram</a>
@@ -1498,9 +1508,11 @@
         </div>
       </div>
     </div>
-    <div class="band-card appear" style="transition-delay:0.12s" data-band-url="band2.html" role="link" tabindex="0">
-      <div class="bc-num">02</div>
-      <h3 class="bc-name">팀 이름 TBD</h3>
+    <div class="band-card appear" style="transition-delay:0.12s">
+      <a href="band2.html" class="bc-entry">
+        <span class="bc-num">02</span>
+        <h3 class="bc-name">팀 이름 TBD</h3>
+      </a>
       <p class="bc-desc">팀 소개 한 줄 — 분위기, 매력 포인트 등을 여기에 작성해주세요.</p>
       <div class="bc-links">
         <a href="#" class="bc-link">📷 Instagram</a>
@@ -1518,9 +1530,11 @@
         </div>
       </div>
     </div>
-    <div class="band-card appear" style="transition-delay:0.24s" data-band-url="band3.html" role="link" tabindex="0">
-      <div class="bc-num">03</div>
-      <h3 class="bc-name">팀 이름 TBD</h3>
+    <div class="band-card appear" style="transition-delay:0.24s">
+      <a href="band3.html" class="bc-entry">
+        <span class="bc-num">03</span>
+        <h3 class="bc-name">팀 이름 TBD</h3>
+      </a>
       <p class="bc-desc">팀 소개 한 줄 — 분위기, 매력 포인트 등을 여기에 작성해주세요.</p>
       <div class="bc-links">
         <a href="#" class="bc-link">📷 Instagram</a>
@@ -1930,7 +1944,8 @@
 
   // 세트리스트 토글
   document.querySelectorAll('.bc-setlist-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
       const num = btn.id.replace('setlist-toggle-', '');
       const target = document.getElementById('setlist-' + num);
       const willOpen = !target.classList.contains('open');
@@ -1946,20 +1961,6 @@
         btn.classList.add('open');
         target.classList.add('open');
       }
-    });
-  });
-
-  // 밴드 카드 클릭 이동
-  document.querySelectorAll('.band-card[data-band-url]').forEach(card => {
-    card.addEventListener('click', e => {
-      if (e.target.closest('a, button')) return;
-      window.location.href = card.dataset.bandUrl;
-    });
-    card.addEventListener('keydown', e => {
-      if (e.key !== 'Enter' && e.key !== ' ') return;
-      if (e.target.closest('a, button')) return;
-      e.preventDefault();
-      window.location.href = card.dataset.bandUrl;
     });
   });
 
