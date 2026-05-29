@@ -277,6 +277,19 @@
     nav { backdrop-filter: blur(10px); }
     .back-pill { backdrop-filter: blur(8px); }
     .track-list { backdrop-filter: blur(12px); }
+    .appear {
+      transform: translateY(6px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .sns-btn:hover,
+    .btn-main:hover,
+    .member-sns:hover,
+    .gallery-item:hover,
+    .gallery-item:hover img,
+    .yt-play-btn:hover {
+      transform: none;
+      box-shadow: none;
+    }
     nav { padding: 1rem 1.2rem; }
     .nav-burger { display: flex; }
     .nav-links {

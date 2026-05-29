@@ -635,6 +635,21 @@
     .timeline { padding-left: 80px; }
     .tl-time { left: -80px; width: 65px; font-size: 0.75rem; }
     .section { padding: 4.5rem 1.5rem; }
+    .appear {
+      transform: translateY(6px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .band-card:hover,
+    .notice-card:hover,
+    .btn-main:hover,
+    .tc-btn:hover,
+    .mbtn-pay:hover,
+    .bc-link:hover,
+    .share-btn:hover,
+    .cheer-submit:hover {
+      transform: none;
+      box-shadow: none;
+    }
   }
   @media (max-width: 900px) {
     .bands-grid {
