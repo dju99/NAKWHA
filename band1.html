@@ -10,6 +10,8 @@
 <meta property="og:image" content="og-image-band1.png">
 <meta property="og:url" content="https://dju99.github.io/NAKWHA/band1.html">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -113,11 +115,15 @@
     opacity: 0.5;
     pointer-events: none;
   }
-  .blob-1 { width: 520px; height: 520px; background: radial-gradient(circle, #f9a8d4, transparent); top: -120px; left: -100px; animation: float 9s ease-in-out infinite; }
-  .blob-2 { width: 420px; height: 420px; background: radial-gradient(circle, #c4b5fd, transparent); bottom: -100px; right: 5%; animation: float 11s ease-in-out infinite reverse; }
-  .blob-3 { width: 280px; height: 280px; background: radial-gradient(circle, #a7f3d0, transparent); top: 35%; right: -50px; animation: float 7s ease-in-out infinite 1.5s; }
-  .blob-4 { width: 200px; height: 200px; background: radial-gradient(circle, #fde68a, transparent); bottom: 20%; left: 8%; animation: float 8s ease-in-out infinite 3s; }
+  .blob-1 { width: 520px; height: 520px; background: radial-gradient(circle, #f9a8d4, transparent); top: -120px; left: -100px; animation: float 9s ease-in-out infinite; will-change: transform; }
+  .blob-2 { width: 420px; height: 420px; background: radial-gradient(circle, #c4b5fd, transparent); bottom: -100px; right: 5%; animation: float 11s ease-in-out infinite reverse; will-change: transform; }
+  .blob-3 { width: 280px; height: 280px; background: radial-gradient(circle, #a7f3d0, transparent); top: 35%; right: -50px; animation: float 7s ease-in-out infinite 1.5s; will-change: transform; }
+  .blob-4 { width: 200px; height: 200px; background: radial-gradient(circle, #fde68a, transparent); bottom: 20%; left: 8%; animation: float 8s ease-in-out infinite 3s; will-change: transform; }
   @keyframes float { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-28px) scale(1.07); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-blob, .petal, .scroll-cue, .appear { animation: none !important; transition: none !important; }
+    .appear { opacity: 1; transform: none; }
+  }
   .petal { position: absolute; pointer-events: none; opacity: 0; font-size: 1rem; animation: fall linear infinite; }
   @keyframes fall { 0% { transform: translateY(-40px) rotate(0deg); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.5; } 100% { transform: translateY(105vh) rotate(720deg); opacity: 0; } }
   .hero-inner { position: relative; z-index: 2; width: min(920px, 100%); }
@@ -209,6 +215,10 @@
   .video-preview-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
   .video-preview { overflow: hidden; border-radius: 16px; border: 1px solid rgba(196,132,252,0.2); background: #fff; }
   .video-preview iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; background: #0d0616; }
+  .yt-facade { position: relative; aspect-ratio: 16 / 9; cursor: pointer; background: #0d0616; overflow: hidden; }
+  .yt-facade img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .yt-play-btn { position: absolute; inset: 0; margin: auto; width: 54px; height: 54px; background: rgba(0,0,0,0.72); border: none; border-radius: 50%; color: #fff; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s; padding-left: 4px; }
+  .yt-play-btn:hover { background: #ff0000; transform: scale(1.12); }
   .video-caption { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; padding: 0.75rem 0.85rem; color: #6f3a7d; font-size: 0.78rem; font-weight: 800; }
   .video-caption span:last-child { color: #c06ba0; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
   .members-section { background: linear-gradient(180deg, var(--bg-light), #f5eeff); }
@@ -262,6 +272,11 @@
   [data-theme="dark"] .setlist-section { background: linear-gradient(135deg, var(--band-dark-a), var(--band-dark-b), var(--band-dark-c)); }
   [data-theme="dark"] footer { background: #060210; }
   @media (max-width: 700px) {
+    .hero-blob { filter: blur(40px); }
+    .blob-3, .blob-4 { display: none; }
+    nav { backdrop-filter: blur(10px); }
+    .back-pill { backdrop-filter: blur(8px); }
+    .track-list { backdrop-filter: blur(12px); }
     nav { padding: 1rem 1.2rem; }
     .nav-burger { display: flex; }
     .nav-links {
@@ -294,6 +309,10 @@
     .member-card {
       flex: 0 0 min(78vw, 300px);
       scroll-snap-align: center;
+    }
+    .member-card:hover {
+      transform: none;
+      box-shadow: none;
     }
     .video-preview-head { align-items: flex-start; flex-direction: column; }
     .video-preview-grid { grid-template-columns: 1fr; }
@@ -388,11 +407,17 @@
       </div>
       <div class="video-preview-grid">
         <div class="video-preview">
-          <iframe src="https://www.youtube.com/embed/HtOB5Rg5k1M?rel=0" title="NAKWHA YouTube Preview 1" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="yt-facade" data-ytid="HtOB5Rg5k1M">
+            <img src="https://i.ytimg.com/vi/HtOB5Rg5k1M/hqdefault.jpg" alt="낙화 PEAK FESTIVAL 2026 브이로그" loading="lazy" decoding="async">
+            <button class="yt-play-btn" aria-label="동영상 재생">▶</button>
+          </div>
           <div class="video-caption"><span>낙화 PEAK FESTIVAL 2026 브이로그</span><span>Preview</span></div>
         </div>
         <div class="video-preview">
-          <iframe src="https://www.youtube.com/embed/DwQaZtk8MBk?rel=0" title="NAKWHA YouTube Preview 2" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="yt-facade" data-ytid="DwQaZtk8MBk">
+            <img src="https://i.ytimg.com/vi/DwQaZtk8MBk/hqdefault.jpg" alt="낙화 한강 피크닉 브이로그" loading="lazy" decoding="async">
+            <button class="yt-play-btn" aria-label="동영상 재생">▶</button>
+          </div>
           <div class="video-caption"><span>낙화 한강 피크닉 브이로그</span><span>Preview</span></div>
         </div>
       </div>
@@ -441,18 +466,18 @@
     <p class="s-eyebrow">Gallery</p>
     <h2 class="s-title">우리의 <span class="g">순간들</span></h2>
     <div class="gallery-grid">
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996.jpg" alt="NAKWHA moment 1"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_01.jpg" alt="NAKWHA moment 2"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_02.jpg" alt="NAKWHA moment 3"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_03.jpg" alt="NAKWHA moment 4"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_04.jpg" alt="NAKWHA moment 5"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_05.jpg" alt="NAKWHA moment 6"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_06.jpg" alt="NAKWHA moment 7"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_07.jpg" alt="NAKWHA moment 8"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_08.jpg" alt="NAKWHA moment 9"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222157996_09.jpg" alt="NAKWHA moment 10"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222715290.jpg" alt="NAKWHA moment 11"></div>
-      <div class="gallery-item appear"><img src="BAND_1/img/KakaoTalk_20260529_222715290_01.jpg" alt="NAKWHA moment 12"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996.jpg" alt="NAKWHA moment 1"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_01.jpg" alt="NAKWHA moment 2"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_02.jpg" alt="NAKWHA moment 3"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_03.jpg" alt="NAKWHA moment 4"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_04.jpg" alt="NAKWHA moment 5"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_05.jpg" alt="NAKWHA moment 6"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_06.jpg" alt="NAKWHA moment 7"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_07.jpg" alt="NAKWHA moment 8"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_08.jpg" alt="NAKWHA moment 9"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222157996_09.jpg" alt="NAKWHA moment 10"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222715290.jpg" alt="NAKWHA moment 11"></div>
+      <div class="gallery-item appear"><img loading="lazy" decoding="async" src="BAND_1/img/KakaoTalk_20260529_222715290_01.jpg" alt="NAKWHA moment 12"></div>
     </div>
   </div>
 </section>
@@ -503,17 +528,33 @@
       petalContainer.appendChild(p);
     }
   });
-  let lastPetal = 0;
-  document.addEventListener('mousemove', e => {
-    const now = Date.now();
-    if (now - lastPetal < 85) return;
-    lastPetal = now;
-    const p = document.createElement('span');
-    p.className = 'cursor-petal';
-    p.textContent = ['🌸','🌷','❀'][Math.floor(Math.random() * 3)];
-    p.style.cssText = `left:${e.clientX - 8}px;top:${e.clientY - 8}px;font-size:${0.55 + Math.random() * 0.55}rem`;
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 1100);
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+  if (!isTouchDevice) {
+    let lastPetal = 0;
+    document.addEventListener('mousemove', e => {
+      const now = Date.now();
+      if (now - lastPetal < 85) return;
+      lastPetal = now;
+      const p = document.createElement('span');
+      p.className = 'cursor-petal';
+      p.textContent = ['🌸','🌷','❀'][Math.floor(Math.random() * 3)];
+      p.style.cssText = `left:${e.clientX - 8}px;top:${e.clientY - 8}px;font-size:${0.55 + Math.random() * 0.55}rem`;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 1100);
+    });
+  }
+
+  document.querySelectorAll('.yt-facade').forEach(facade => {
+    facade.addEventListener('click', () => {
+      const id = facade.dataset.ytid;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${id}?rel=0&autoplay=1`;
+      iframe.title = facade.querySelector('img').alt;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.cssText = 'display:block;width:100%;aspect-ratio:16/9;border:0;background:#0d0616;';
+      facade.replaceWith(iframe);
+    }, { once: true });
   });
 
   const observer = new IntersectionObserver(entries => {
